@@ -31,7 +31,6 @@
 from __future__ import division
 import sys
 from CrayPat.PatReport import PatReport
-from CrayPat.PatRegion import PatRegion
 from Plots.Plots import Plots
 
 #
