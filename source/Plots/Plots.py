@@ -42,7 +42,7 @@ class Plots:
       self.marker_type = ['o', 'v', '^', '<', '>', '8', 's', 'p', '*', 'h', 'H', 'D', 'd', 'P', 'X']
       self.n_alpha = 0.75
       self.max_legend = 20
-      self.nDPI = 600
+      self.nDPI = 300
       self.slabel = 10
       self.x_range = np.array([0.01,100])
       self.y_range = np.array([1.0, 10**math.ceil(math.log10(self.Max_y))])
