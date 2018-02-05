@@ -13,12 +13,11 @@ Examples:
       Output files:        two roofline plots; roofline_DCR_Good and roofline_L1_DCA
 
    - Roofline plots for multiple CrayPat report
-      Execution line:      % python3 NCSA-RT_CrayPat.py {a filename of a list of CrayPat reports} {a Pat_Region name, optional, default: None}
+      Execution line:      % python3 NCSA-RT_CrayPat.py {a filename of a list of CrayPat reports} {the 2nd CLA}
       Output files:        two roofline plots; roofline_DCR_Good and roofline_L1_DCA
       The list format:     line 1: filename1, legend_name1, Pat_Region_name1[optional], nThread[optional]
                            ...
                            line n: filename(n), legend_name(n), Pat_Region_name(n)[optional],  nThread[optional]
-      Rule of 2nd CLA:     Using the 2nd Command Line Argument(CLA), Pat_Region name can be set. (Default: None)
-                           If Pat_Regions == "None", plots for each Pat_report are produced, instead of plots for multiple Pat_reports. 
+      Rule of the 2nd CLA: If the 2nd CLA(Command Line Argument) exists, the script generates roofline plots for every CrayPat report in the list. Otherwise, it generates combined roofline plots for all CrayPat reports in the list
 
 
