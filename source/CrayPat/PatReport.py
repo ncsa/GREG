@@ -84,13 +84,13 @@ class PatReport:
       for i,line in enumerate(A):
          if line.startswith('Table 4:  Memory High Water Mark by Numa Node'):
             words = A[i+7].split()
-            HiMem_candidate.append(float(words[2]))
-            HiMem_candidate.append(float(words[4]))
-            HiMem_candidate.append(float(words[6]))
-            HiMem_candidate.append(float(words[8]))
+            HiMem_candidate.append(float(words[2].replace(",","")))
+            HiMem_candidate.append(float(words[4].replace(",","")))
+            HiMem_candidate.append(float(words[6].replace(",","")))
+            HiMem_candidate.append(float(words[8].replace(",","")))
             for j in range(4):
                words = A[i+9+j].split()
-               HiMem_candidate.append(float(words[1]))
+               HiMem_candidate.append(float(words[1].replace(",","")))
             self.HiMem = max(HiMem_candidate)
             break
 

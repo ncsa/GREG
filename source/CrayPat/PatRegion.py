@@ -35,7 +35,7 @@ class PatRegion:
          if line_split[0]=='Time%':
             self.Time_percentage = float(line_split[1].replace("%",""))
          if line_split[0]=='Time':
-            self.Time = float(line_split[1])
+            self.Time = float(line_split[1].replace(",",""))
          if line_split[0]=='PAPI_L1_DCA':
             self.PAPI_L1_DCA=int(float(line_split[len(line_split)-2].replace(",","")))
          if line_split[0]=='GOOD':
