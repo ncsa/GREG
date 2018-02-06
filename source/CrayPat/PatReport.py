@@ -65,7 +65,7 @@ class PatReport:
       fname_out =self.fname+'_data.csv'
       print ('   Writing CrayPat data to %s file'%fname_out)
       fcsv = open(fname_out,'w')
-      fcsv.write('title,time_percentage,OPS,L1_DCA,L1_DCA_based_CI,DCR_Good,DCR_Good_based_CI,GFLOP/s/node\n')
+      fcsv.write('title,time_percentage,time,OPS,L1_DCA,L1_DCA_based_CI,DCR_Good,DCR_Good_based_CI,GFLOP/s/node\n')
       for R in self.Regions:
-         fcsv.write('%s,%f,%d,%d,%f,%d,%f,%f\n'%(R.title,R.Time_percentage,R.PAPI_FP_OPS,R.PAPI_L1_DCA,R.CI_L1_DCA,R.DCR_Good,R.CI_DCR_Good,R.GFLOPS_per_Node))
+         fcsv.write('%s,%f,%f,%d,%d,%f,%d,%f,%f\n'%(R.title,R.Time_percentage,R.Time,R.PAPI_FP_OPS,R.PAPI_L1_DCA,R.CI_L1_DCA,R.DCR_Good,R.CI_DCR_Good,R.GFLOPS_per_Node))
       fcsv.close()
