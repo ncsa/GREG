@@ -65,34 +65,24 @@ class PatReport:
       self.read_HiMem(A)
 
    def read_HiMem(self,A):
-   # Read Memory High Water Mark by Numa Node (e.g., read the following block)
-   # Table 4:  Memory High Water Mark by Numa Node
+   # Table 5:  Wall Clock Time, Memory High Water Mark (limited entries shown)
    #
-   #   Process |    HiMem |    HiMem |    HiMem |    HiMem | Numanode
-   #     HiMem |     Numa |     Numa |     Numa |     Numa |  PE=HIDE
-   #  (MBytes) |   Node 0 |   Node 1 |   Node 2 |   Node 3 |
-   #           | (MBytes) | (MBytes) | (MBytes) | (MBytes) |
+   #    Process |  Process | PE=[mmm]
+   #       Time |    HiMem |
+   #            | (MBytes) |
    #
-   #     269.7 |     71.5 |     72.5 |     63.6 |     62.1 | Total
-   # |-----------------------------------------------------------------
-   # |     67.1 |     58.4 |      4.6 |      2.2 |      1.9 | numanode.0
-   # |     67.8 |      4.4 |     59.2 |      2.2 |      1.9 | numanode.1
-   # |     67.7 |      4.3 |      4.3 |     56.9 |      2.2 | numanode.2
-   # |     67.1 |      4.4 |      4.3 |      2.2 |     56.2 | numanode.3
-   # |=================================================================
-      HiMem_candidate = []
+   #  15.918406 |    183.6 | Avg of PE values
+   # |---------------------------------------
+   # | 16.558169 |    178.5 | pe.4
+   # | 15.909012 |    178.5 | pe.59
+   # | 15.444538 |    176.8 | pe.28
+   # |=======================================
       for i,line in enumerate(A):
-         if line.startswith('Table 4:  Memory High Water Mark by Numa Node'):
-            words = A[i+7].split()
-            HiMem_candidate.append(float(words[2].replace(",","")))
-            HiMem_candidate.append(float(words[4].replace(",","")))
-            HiMem_candidate.append(float(words[6].replace(",","")))
-            HiMem_candidate.append(float(words[8].replace(",","")))
-            for j in range(4):
-               words = A[i+9+j].split()
-               HiMem_candidate.append(float(words[1].replace(",","")))
-            self.HiMem = max(HiMem_candidate)
+         if line.endswith('Memory High Water Mark (limited entries shown)\n'):
+            words = A[i+6].split()
+            self.HiMem = float(words[2].replace(",",""))
             break
+      print ('   HiMem (Avg of PE values) = {} MBytes'.format(self.HiMem))
 
    def write_csv(self):
       # Write Pat_Regions to a CSV file
