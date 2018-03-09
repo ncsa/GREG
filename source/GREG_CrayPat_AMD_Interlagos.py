@@ -1,7 +1,7 @@
 #
 #  Description: Draw roofline plots after reading CrayPat reports
 #
-#  Filename:   NCSA-RT_CrayPat.py
+#  Filename:   GREG_CrayPat_AMD_Interlagos.py
 #  Update description :
 #         1) Read a filename of a CrayPat report or a list of pat_reports via command line arguments
 #              - the list file should use the following format
