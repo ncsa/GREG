@@ -8,6 +8,21 @@ Roofline analysis model is a visually intuitive performance model used to provid
 * Tested System: [NCSA Blue Waters](https://bluewaters.ncsa.illinois.edu/blue-waters-overview)
 * Employed Profiling Tool: [Cray Performance Measurement and Analysis Tools - CrayPat](https://bluewaters.ncsa.illinois.edu/cpmat)
 
+#### Instructions to get a CrayPat report on Blue Waters
+  1. Updating modules for CrayPat  
+    `module unload darshan`  
+    `module load perftools-base perftools` 
+  2. Building your application again after cleaning up existing object files
+  3. Instrument the executable binary with "-w"  
+    `pat_build -w a.out`  
+    It will generate `a.out+pat`. 
+  4. Run the instrumented executable binary ending with "+pat" with the following environmental variables in your job  
+    `export PAT_RT_SUMMARY=0`  
+    `export PAT_RT_PERFCTR=DATA_CACHE_REFILLS_FROM_L2_OR_NORTHBRIDGE:GOOD,PAPI_L1_DCA,PAPI_FP_OPS`  
+    After completing the execution, CrayPat generates *an xf file* or *a folder* starting with "a.out+pat+" (e.g., a.out+pat+17402-6240t).   
+  5. Producing a CrayPat report using the `pat_report` command.   
+    `pat_report -o {a CrayPat report name you want} {the name of the xf file or the folder} `
+
 #### Roofline plots for a sinlge CrayPat report
    * Execution: `$ python3 GREG_CrayPat_AMD_Interlagos.py CLA1 CLA2`
 
