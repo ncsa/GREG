@@ -1,3 +1,5 @@
+#  Copyright (C) 2018, University of Illinois Board of Trustees. All Rights Reserved.
+#  Licensed under the NCSA open source license
 #
 #  Description: This module contains a class, PatReport.
 #
