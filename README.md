@@ -10,45 +10,45 @@ Roofline analysis model is a visually intuitive performance model used to provid
 
 #### Instructions to get a CrayPat report on Blue Waters
   1. Updating modules for CrayPat  
-    `module unload darshan`  
-    `module load perftools-base perftools` 
+    `$ module unload darshan`  
+    `$ module load perftools-base perftools` 
   2. Building your application again after cleaning up existing object files
   3. Instrument the executable binary with "-w"  
-    `pat_build -w a.out`  
+    `$ pat_build -w a.out`  
     It will generate `a.out+pat`. 
   4. Run the instrumented executable binary ending with "+pat" with the following environmental variables in your job  
-    `export PAT_RT_SUMMARY=0`  
-    `export PAT_RT_PERFCTR=DATA_CACHE_REFILLS_FROM_L2_OR_NORTHBRIDGE:GOOD,PAPI_L1_DCA,PAPI_FP_OPS`  
+    `$ export PAT_RT_SUMMARY=0`  
+    `$ export PAT_RT_PERFCTR=DATA_CACHE_REFILLS_FROM_L2_OR_NORTHBRIDGE:GOOD,PAPI_L1_DCA,PAPI_FP_OPS`  
     After completing the execution, CrayPat generates *an xf file* or *a folder* starting with "a.out+pat+" (e.g., a.out+pat+17402-6240t).   
   5. Producing a CrayPat report using the `pat_report` command.   
-    `pat_report -o {a CrayPat report name you want} {the name of the xf file or the folder} `
+    `$ pat_report -o {a CrayPat report name you want} {the name of the xf file or the folder} `
 
-#### Roofline plots for a sinlge CrayPat report
-   * Execution: `$ python3 GREG_CrayPat_AMD_Interlagos.py CLA1 CLA2`
+#### Roofline Analysis on Blue Waters
+```
+$ modlue load bwpy                                    # on Blue Waters
+$ cd ~/GREG/source                                    # if GREG is located on $(HOME)
+$ python3 GREG_CrayPat_AMD_Interlagos.py CLA1 CLA2    # See the bottom for more details for CLA1 and CLA2
+```
 
+##### Inputs for a single CrayPat report
    * Details about CLAs (Command Line Arguments)
      * CLA1: a filename of a CrayPat report, *required*
      * CLA2: number of threads per MPI rank, *optional* (default = 1)
 
-   * Outputs: two roofline plots
-     * Roofline plot based on DATA_CACHE_REFILLS_FROM_L2_OR_NORTHBRIDGE:GOOD (DCR_GOOD) counter data, *recommended*
-     * Roofline plot based on PAPI_L1_DCA counter data, *CrayPat default*
-
-#### Roofline plots for multiple CrayPat reports
-   * Execution: `$ python3 GREG_CrayPat_AMD_Interlagos.py CLA1 CLA2`
-
+##### Inputs for multiple CrayPat reports
    * Details about CLAs (Command Line Arguments)
      * CLA1: a text filename that includes a list of CrayPat reports, *required*
      * CLA2: If CLA2 exists, the script generates roofline plots for every CrayPat report in the list, *optional* 
-
-   * Outputs: two roofline plots
-     * Roofline plot based on DATA_CACHE_REFILLS_FROM_L2_OR_NORTHBRIDGE:GOOD (DCR_GOOD) counter data, *recommended*
-     * Roofline plot based on PAPI_L1_DCA counter data, *CrayPat default*
 
    * Format for the list
       > line 1: filename1, legend_name1, Pat_Region_name1 (*optional*), number of threads (*optional*)  
       > ...  
       > line n: filename(n), legend_name(n), Pat_Region_name(n) (*optional*), number of threads (*optional*)
+
+##### Outputs (i.e., two roofline plots)
+  * Roofline plot based on DATA_CACHE_REFILLS_FROM_L2_OR_NORTHBRIDGE:GOOD (DCR_GOOD) counter data, *recommended*
+  * Roofline plot based on PAPI_L1_DCA counter data, *CrayPat default*
+
 
 
 ## Bug report and requests
