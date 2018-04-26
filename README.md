@@ -32,15 +32,15 @@ $ python3 GREG_CrayPat_AMD_Interlagos.py CLA1 CLA2    # See the bottom for more 
 
 ##### Inputs for a single CrayPat report
    * Details about CLAs (Command Line Arguments)
-     * CLA1: a filename of a CrayPat report, *required*
+     * CLA1: a CrayPat report file, *required*
      * CLA2: number of threads per MPI rank, *optional* (default = 1)
 
 ##### Inputs for multiple CrayPat reports
    * Details about CLAs (Command Line Arguments)
-     * CLA1: a text filename that includes a list of CrayPat reports, *required*
-     * CLA2: If CLA2 exists, the script generates roofline plots for every CrayPat report in the list, *optional* 
+     * CLA1: a text file listing the CrayPat reports, *required*
+     * CLA2: If not empty, the script generates separate roofline plots for every CrayPat report listed in CLA1. Otherwise, a single roofline plot is generated for specified data of CrayPat reports, *optional*
 
-   * Format for the list
+   * Format for the list in CLA1
       > line 1: filename1, legend_name1, Pat_Region_name1 (*optional*), number of threads (*optional*)  
       > ...  
       > line n: filename(n), legend_name(n), Pat_Region_name(n) (*optional*), number of threads (*optional*)
